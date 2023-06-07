@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/jeu"
+        android:icon="@drawable/manette"
+        android:title="Jeux" />
+    <item
+        android:id="@+id/classe"
+        android:icon="@drawable/ranking"
+        android:title="Classement" />
+    <item
+        android:id="@+id/parametre"
+        android:icon="@drawable/settings"
+        android:title="Paramètre" />
+    <item
+        android:id="@+id/compte"
+        android:icon="@drawable/person"
+        android:title="Compte" />
+</menu>
