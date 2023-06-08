@@ -11,9 +11,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -76,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (motCorrect) {
+
                     Toast.makeText(MainActivity.this, "Bravo ! Vous avez deviné le mot.", Toast.LENGTH_SHORT).show();
                    incrementScore();
                     // Générer un nouveau mot
@@ -120,6 +124,8 @@ public class MainActivity extends AppCompatActivity {
     }
     // Méthode appelée lorsqu'une bonne réponse est trouvée
     private void incrementScore() {
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.audience);
+        mediaPlayer.start();
         score =score+1;
         scoreText.setText("Score: " + score);
     }
@@ -167,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
             textViewLettre.setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT));
-            textViewLettre.setTextSize(20);
+            textViewLettre.setTextSize(30);
             textViewLettre.setTextColor(Color.BLACK);
             textViewLettre.setPadding(8, 8, 8, 8);
             textViewLettre.setText(String.valueOf(lettre));
@@ -233,8 +239,26 @@ public class MainActivity extends AppCompatActivity {
             countdownTimer.cancel();
         }
     }
+    @Override
+    public void onBackPressed() {
+        // Arrêter l'activité et quitter l'application
+        finish();
+        timer.cancel();
+        countdownTimer.cancel();
+    }
 
     private void showGameOverDialog() {
+
+        // Vibrer le téléphone
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator != null && vibrator.hasVibrator()) {
+            // Jouer le son de "Game Over"
+            MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.game_over);
+            mediaPlayer.start();
+            vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+        }
+
+        //Afficher AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Game Over")
                 .setMessage("Votre score est inférieur ou égal à 0. Vous avez perdu !");

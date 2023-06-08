@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/im2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -20,8 +21,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Indice"
-                android:textSize="40dp"
+                android:textColor="@color/white"
+                android:text="Le Mot à deviner est composé des lettres ci dessous"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -43,6 +45,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reponse"
                     android:layout_width="match_parent"
+                    android:textSize="20dp"
                     android:layout_height="wrap_content"
                     android:hint="Veuillez entrer un mot" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -70,6 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/lavender"
+                android:layout_marginTop="25sp"
                 android:textSize="40dp"
                 android:textStyle="bold"
                 />
@@ -83,14 +87,19 @@
                 android:id="@+id/chronometreTextView"/>
 
         </LinearLayout>
+
         <TextView
             android:id="@+id/scoreTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="130dp"
+            android:gravity="center"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/back"
+            android:padding="10dp"
             android:text="Score: 0"
-            android:layout_alignParentEnd="true"
-            android:textSize="20sp"
-            android:padding="10dp"/>
+
+            android:textSize="20sp" />
         <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
