@@ -1,26 +1,20 @@
 package com.cyrille.worddetective;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.SystemClock;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Chronometer;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,10 +27,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
-import com.cyrille.worddetective.HomeActivity;
-public class MainActivity extends AppCompatActivity {
-     int score =9 ;
-     LinearLayout linearLayout;
+
+public class NormalActivity extends AppCompatActivity {
+    int score =9 ;
+    LinearLayout linearLayout;
     Button soumettre;
     TextInputEditText textInputEditText;
     private String motADeviner;
@@ -44,17 +38,18 @@ public class MainActivity extends AppCompatActivity {
     TextView textMotADeviner,scoreText;
     private TextView chronometreTextView;
     private CountDownTimer countdownTimer;
-    String[] mots ={"chat", "nuage", "doux", "peur", "table", "soir", "rire", "noir", "pomme", "ferme", "bleu", "belle", "ouest", "rouge", "verre", "café", "dîner", "ville", "école", "poire", "chien", "jouer", "livre", "dormir", "fleur", "port", "sable", "carte", "lune", "soleil", "vent", "pain", "vin", "manger", "salut", "cadeau", "voix", "film", "fruit", "musée", "arbre", "vague", "mer", "bien", "avril", "idée", "nuit", "juin", "nager", "parc", "robe", "printemps", "automne", "hiver", "été", "sac", "page", "nez", "roi", "bois", "plat", "merci", "chose", "fort", "vite", "joli", "corps", "ours", "loup", "lion", "chou", "lapin", "daim", "cygne", "veau", "vache", "agneau", "cheval", "âne", "dinde", "poule", "canard", "oie", "biche", "cerf", "renard", "rat", "souris", "chaton", "chiot", "faon", "tigre", "loutre", "belette", "mouton", "bœuf", "légume", "fruits", "pêche", "raisin", "banane", "orange", "melon", "fraise", "kiwi", "tomate", "poivron", "citron", "ananas", "champignon", "brocoli", "fenouil", "céleri", "poireau", "oignon", "radis", "maïs", "carotte", "pomme de terre", "artichaut", "aubergine", "pois", "salade", "chou-fleur", "haricot", "courgette", "concombre", "betterave", "choux de Bruxelles", "asperge", "épinard", "patate douce", "cresson", "endive", "navet", "potiron", "chicorée", "roquette", "romaine", "scarole", "mâche", "laitue", "échalote", "ail", "topinambour", "rutabaga", "fenouil", "citrouille", "potimarron", "rose", "tulipe", "orchidée", "marguerite", "pensée", "mimosa", "lys", "pivoine", "coquelicot", "nénuphar", "fougère", "edelweiss", "cactus", "jasmin", "géranium", "camélia", "hortensia", "lavande", "sauge", "roseau", "palmier", "érable", "chêne", "saule", "cèdre", "bouleau", "pin", "sapin", "platane", "cyprès", "if", "châtaignier", "hêtre", "aulne", "frêne", "acacia", "tilleul", "olivier", "genévrier", "pommier", "prunier", "abricotier", "cerisier", "poirier", "pêcher", "figuier", "amandier", "noyer", "vigne", "cognassier", "grenadier", "citronnier", "oranger", "néflier", "pistachier", "bananier", "manguier"};
+    String[] mots={"course", "vente", "salade", "soleil", "hôtel", "table", "nature", "orange", "village", "poulet", "hiver", "beauté", "passer", "souris", "musée", "cinéma", "argent", "amoureux", "ananas", "sieste", "pluie", "animal", "douche", "plante", "gâteau", "papier", "poisson", "jardin", "camping", "peintre", "voyage", "écrire", "calme", "farine", "fleur", "métro", "piano", "astéro", "bougie", "fraise", "légume", "randonn", "volcan", "rivière", "pétale", "citron", "banane", "famille", "fête", "groupe", "chante", "blague", "pièce", "course", "fraise", "couple", "fruits", "avion", "amour", "gloire", "héros", "île", "jungle", "kiosque", "larme", "mystère", "nuance", "ombre", "pouvoir", "quartier", "rêve", "soleil", "travail", "union", "vélo", "wagon", "xylophone", "yoga", "zoo", "amusant", "blanche", "cahier", "délice", "écho", "faucon", "globe", "hôpital", "image", "jupe", "kaki", "lampe", "machine", "noble", "orange", "papillon", "quitter", "rose", "simple", "tableau", "utile", "vague", "wagon", "xylophone", "yeux", "zebra", "acacia", "bambou", "cascade", "délicieux", "élégant", "flamme", "gorille", "hibou", "intelligent", "jouet", "kiwi", "lentille", "mango", "noix", "oasis", "pamplemousse", "quartz", "raisin", "salade", "tamis", "univers", "vanille", "walrus", "xylophagous", "yacht", "zeppelin", "abord", "brouillard", "cloche", "décor", "effort", "fille", "grille", "hache", "indice", "joker", "klaxon", "lance", "moule", "nuage", "oasis", "pamplemousse", "quart", "rouleau", "sable", "toile", "usage", "vase", "wagon", "xylem", "yoga", "zèbre", "arcade", "bonnet", "cercle", "délice", "effet", "farine", "grappe", "hache", "idée", "joie", "kiwi", "lampe", "moule", "nouveau", "orage", "paix", "quille", "rouleau", "sable", "tiroir", "utile", "vase", "wagon", "xylophone", "yoga", "zèbre"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_normal);
         soumettre=findViewById(R.id.btn_submit);
         chronometreTextView = findViewById(R.id.chronometreTextView);
         textMotADeviner=findViewById(R.id.textMotADeviner);
-       textInputEditText = findViewById(R.id.reponse);
-       scoreText=findViewById(R.id.scoreTextView);
-      linearLayout = findViewById(R.id.layoutLettres);
+        textInputEditText = findViewById(R.id.reponse);
+        scoreText=findViewById(R.id.scoreTextView);
+        linearLayout = findViewById(R.id.layoutLettres);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setSelectedItemId(R.id.jeu);
         scoreText.setText("Score: " + score);
@@ -79,17 +74,17 @@ public class MainActivity extends AppCompatActivity {
 
                 if (motCorrect) {
 
-                    Toast.makeText(MainActivity.this, "Bravo ! Vous avez deviné le mot.", Toast.LENGTH_SHORT).show();
-                   incrementScore();
+                    Toast.makeText(NormalActivity.this, "Bravo ! Vous avez deviné le mot.", Toast.LENGTH_SHORT).show();
+                    incrementScore();
                     // Générer un nouveau mot
                     genererMotAleatoire();
 
                     // Relancer le compte à rebours
                     lancerCompteARebours();
                 } else {
-                    Toast.makeText(MainActivity.this, "Ce n'est pas le bon mot. Essayez encore.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NormalActivity.this, "Ce n'est pas le bon mot. Essayez encore.", Toast.LENGTH_SHORT).show();
                     decrementScore();
-               }
+                }
 
                 textInputEditText.getText().clear();
             }
@@ -220,15 +215,12 @@ public class MainActivity extends AppCompatActivity {
 
                 // Actions à effectuer lorsque le temps est écoulé
                 // Par exemple, réinitialiser le jeu ou afficher un message de fin de partie.
-                Toast.makeText(MainActivity.this, "Nouveau mot Facile", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NormalActivity.this, "Nouveau mot Normal", Toast.LENGTH_SHORT).show();
                 genererMotAleatoire();
                 lancerCompteARebours();
 
             }
-
         };
-
-
 
         countdownTimer.start();
     }
@@ -254,6 +246,7 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         timer.cancel(); // Arrêter le timer
     }
+
     private void showGameOverDialog() {
 
         // Vibrer le téléphone

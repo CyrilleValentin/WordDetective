@@ -53,7 +53,6 @@
             <Button
                 android:id="@+id/btn_submit"
                 android:layout_width="wrap_content"
-                android:background="@drawable/back"
                 android:layout_height="wrap_content"
                 android:text="Soumettre" />
 
@@ -111,24 +110,24 @@
             android:layout_alignParentStart="true"
             android:layout_marginTop="3dp"
             android:padding="10dp"
-            android:text="Niveau: Facile"
+            android:text="Niveau: Difficile"
 
             android:textSize="20sp" />
         <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="30dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/bottom_background"
-        android:elevation="2dp"
-        app:itemIconSize="30dp"
-        app:itemIconTint="@drawable/item_selector"
-        app:itemRippleColor="@android:color/transparent"
-        app:labelVisibilityMode="unlabeled"
-        app:menu="@menu/bottom_menu" />
+            android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bottom_background"
+            android:elevation="2dp"
+            app:itemIconSize="30dp"
+            app:itemIconTint="@drawable/item_selector"
+            app:itemRippleColor="@android:color/transparent"
+            app:labelVisibilityMode="unlabeled"
+            app:menu="@menu/bottom_menu" />
     </RelativeLayout>
 </RelativeLayout>

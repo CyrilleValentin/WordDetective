@@ -4,12 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/im2"
+    android:orientation="vertical"
     android:gravity="center"
     tools:context=".HomeActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="35dp"
+        android:text="Choisissez votre niveau"/>
 <Button
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/commencer"
-    android:text="Jouer"
+    android:id="@+id/facile"
+    android:layout_marginTop="50dp"
+    android:layout_marginBottom="20dp"
+    android:text="Facile"
     android:textSize="40dp"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/normal"
+        android:text="Normal"
+        android:layout_marginBottom="20dp"
+        android:textSize="40dp"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/difficile"
+        android:text="Difficile"
+        android:layout_marginBottom="20dp"
+        android:textSize="40dp"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/exit"
+        android:text="Quitter"
+        android:textSize="40dp"/>
+
 </LinearLayout>

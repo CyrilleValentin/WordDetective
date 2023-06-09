@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:padding="15dp"
+    android:background="@drawable/im2"
+    tools:context=".RegisterActivity"
+    tools:ignore="ExtraText">
+
+
+    <TextView
+        android:text="Inscription"
+        android:layout_marginBottom="20dp"
+        android:textSize="55sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:drawablePadding="7dp"
+            android:drawableStart="@drawable/baseline_email_24"
+            android:id="@+id/email"
+            android:hint="Email du joueur"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:drawablePadding="7dp"
+            android:drawableStart="@drawable/person"
+            android:id="@+id/name"
+            android:hint="Nom du joueur"
+            android:layout_width="match_parent"
+            android:inputType="text"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/btn_Register"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:text="S'inscrire"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

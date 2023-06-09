@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "516042724565",
+    "project_id": "word-detective-b7a3c",
+    "storage_bucket": "word-detective-b7a3c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516042724565:android:037063651a18f798f17e5c",
+        "android_client_info": {
+          "package_name": "com.cyrille.worddetective"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "516042724565-gb1bicilcdbvc0mli7pq2khb1u02psgl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cyrille.worddetective",
+            "certificate_hash": "4c02b8654207acac2cd0959d240471eb2f23ea89"
+          }
+        },
+        {
+          "client_id": "516042724565-nhg9ipmnn5n54b5ks49e74kk70od5bcu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDo3a__gkNmLmDcwcFwldUZo-tIvtNfMRo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "516042724565-nhg9ipmnn5n54b5ks49e74kk70od5bcu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

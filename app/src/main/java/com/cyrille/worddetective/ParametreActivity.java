@@ -25,7 +25,7 @@ public class ParametreActivity extends AppCompatActivity {
                 finish();
                 return true;
             } else if (selectedItemId == R.id.jeu) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 finish();
                 return true;

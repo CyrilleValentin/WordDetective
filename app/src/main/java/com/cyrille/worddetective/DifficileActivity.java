@@ -1,26 +1,20 @@
 package com.cyrille.worddetective;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.SystemClock;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Chronometer;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,10 +27,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
-import com.cyrille.worddetective.HomeActivity;
-public class MainActivity extends AppCompatActivity {
-     int score =9 ;
-     LinearLayout linearLayout;
+
+public class DifficileActivity extends AppCompatActivity {
+    int score =9 ;
+    LinearLayout linearLayout;
     Button soumettre;
     TextInputEditText textInputEditText;
     private String motADeviner;
@@ -44,17 +38,18 @@ public class MainActivity extends AppCompatActivity {
     TextView textMotADeviner,scoreText;
     private TextView chronometreTextView;
     private CountDownTimer countdownTimer;
-    String[] mots ={"chat", "nuage", "doux", "peur", "table", "soir", "rire", "noir", "pomme", "ferme", "bleu", "belle", "ouest", "rouge", "verre", "café", "dîner", "ville", "école", "poire", "chien", "jouer", "livre", "dormir", "fleur", "port", "sable", "carte", "lune", "soleil", "vent", "pain", "vin", "manger", "salut", "cadeau", "voix", "film", "fruit", "musée", "arbre", "vague", "mer", "bien", "avril", "idée", "nuit", "juin", "nager", "parc", "robe", "printemps", "automne", "hiver", "été", "sac", "page", "nez", "roi", "bois", "plat", "merci", "chose", "fort", "vite", "joli", "corps", "ours", "loup", "lion", "chou", "lapin", "daim", "cygne", "veau", "vache", "agneau", "cheval", "âne", "dinde", "poule", "canard", "oie", "biche", "cerf", "renard", "rat", "souris", "chaton", "chiot", "faon", "tigre", "loutre", "belette", "mouton", "bœuf", "légume", "fruits", "pêche", "raisin", "banane", "orange", "melon", "fraise", "kiwi", "tomate", "poivron", "citron", "ananas", "champignon", "brocoli", "fenouil", "céleri", "poireau", "oignon", "radis", "maïs", "carotte", "pomme de terre", "artichaut", "aubergine", "pois", "salade", "chou-fleur", "haricot", "courgette", "concombre", "betterave", "choux de Bruxelles", "asperge", "épinard", "patate douce", "cresson", "endive", "navet", "potiron", "chicorée", "roquette", "romaine", "scarole", "mâche", "laitue", "échalote", "ail", "topinambour", "rutabaga", "fenouil", "citrouille", "potimarron", "rose", "tulipe", "orchidée", "marguerite", "pensée", "mimosa", "lys", "pivoine", "coquelicot", "nénuphar", "fougère", "edelweiss", "cactus", "jasmin", "géranium", "camélia", "hortensia", "lavande", "sauge", "roseau", "palmier", "érable", "chêne", "saule", "cèdre", "bouleau", "pin", "sapin", "platane", "cyprès", "if", "châtaignier", "hêtre", "aulne", "frêne", "acacia", "tilleul", "olivier", "genévrier", "pommier", "prunier", "abricotier", "cerisier", "poirier", "pêcher", "figuier", "amandier", "noyer", "vigne", "cognassier", "grenadier", "citronnier", "oranger", "néflier", "pistachier", "bananier", "manguier"};
+    String[] mots={"parapluie", "éléphant", "familial", "girafe", "machiner", "racinaire", "clavière", "faisceau", "boulevard", "japonais", "bibliothè", "cartable", "nuisible", "cahier", "tablette", "espérant", "diplôme", "bijouter", "montagne", "préparer", "activer", "endormir", "facteur", "guitare", "harmonie", "imprimer", "randonnée", "travailler", "climat", "question", "poussière", "fauteuil", "savonner", "déjeuner", "armoire", "fenêtre", "ordinate", "piscine", "football", "immeuble", "orchestre", "vacances", "valise", "lavabo", "chameau", "écureuil", "festival", "campagne", "portrait", "hiver", "orchidée", "pleurer", "sourire", "éclairage", "apprécier", "énergie", "toujours", "bienvenue", "aéroport", "décorer", "magasin", "santé", "batterie", "gâteau", "hamburger", "végétal", "aquarium", "parcours", "rêverie", "sculpture", "vétérinaire", "liberté", "abaisser", "affirmer", "baladeur", "calendrier", "dessiner", "tambour", "enchanteur", "festival", "galopant", "incroyable", "jalousie", "kilogramme", "librairie", "mammifère", "naviguer", "observateur", "parasol", "qualifié", "raccompagner", "salamandre", "télévision", "uranium", "vaisselier", "wagonnet", "xérophyte", "yogourt", "zodiaque", "aéroglisseur", "bénévole", "concombre", "dépenser", "élévation", "flamboyant", "gratuité", "héliport", "iconique", "jumelage", "kayakiste", "lévitation", "magnifique", "nauséeux", "optimiste", "provoquer", "quinconce", "recycler", "séduisant", "tablette", "utopique", "ventilateur", "wagon-lit", "xylographie", "yachtman", "zèbre", "abécédaire", "bénéfique", "congrès", "découverte", "éléphant", "fréquence", "géologie", "hélium", "iconoclaste", "jument", "kérosène", "logiciel", "magnétise", "négociant", "officier", "propre", "quartier", "reconnaître", "schéma", "tortue", "utopiste", "vacancier", "wagonnier", "xylophone", "yachting", "zirconium", "acoustique", "bibliothèque", "confiance", "déterminer", "espérance", "flamme", "graphique", "hydraulique", "intégrité", "joaillerie", "klaxonner", "logarithme", "mannequin", "nécessaire", "opportunité", "proverbe", "quintessence", "révolution", "symétrie", "transparence", "utilisation", "vagabonder", "wattmètre", "xénophobe", "yogiste", "zoologiste", "ambassadeur", "bénéficiaire", "concepteur", "démocratie", "éducation", "fidélité", "générosité", "hospitalier", "inspiration", "judiciaire", "kinésithérapie", "loyauté", "magnificence", "négociation", "opposition", "prévision", "qualification", "réalisation", "satisfaction", "technologie", "uniformité", "variabilité", "westphalien", "xérophtalmie", "yogini", "zootechnie"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_difficile);
         soumettre=findViewById(R.id.btn_submit);
         chronometreTextView = findViewById(R.id.chronometreTextView);
         textMotADeviner=findViewById(R.id.textMotADeviner);
-       textInputEditText = findViewById(R.id.reponse);
-       scoreText=findViewById(R.id.scoreTextView);
-      linearLayout = findViewById(R.id.layoutLettres);
+        textInputEditText = findViewById(R.id.reponse);
+        scoreText=findViewById(R.id.scoreTextView);
+        linearLayout = findViewById(R.id.layoutLettres);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setSelectedItemId(R.id.jeu);
         scoreText.setText("Score: " + score);
@@ -79,17 +74,17 @@ public class MainActivity extends AppCompatActivity {
 
                 if (motCorrect) {
 
-                    Toast.makeText(MainActivity.this, "Bravo ! Vous avez deviné le mot.", Toast.LENGTH_SHORT).show();
-                   incrementScore();
+                    Toast.makeText(DifficileActivity.this, "Bravo ! Vous avez deviné le mot.", Toast.LENGTH_SHORT).show();
+                    incrementScore();
                     // Générer un nouveau mot
                     genererMotAleatoire();
 
                     // Relancer le compte à rebours
                     lancerCompteARebours();
                 } else {
-                    Toast.makeText(MainActivity.this, "Ce n'est pas le bon mot. Essayez encore.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DifficileActivity.this, "Ce n'est pas le bon mot. Essayez encore.", Toast.LENGTH_SHORT).show();
                     decrementScore();
-               }
+                }
 
                 textInputEditText.getText().clear();
             }
@@ -220,15 +215,12 @@ public class MainActivity extends AppCompatActivity {
 
                 // Actions à effectuer lorsque le temps est écoulé
                 // Par exemple, réinitialiser le jeu ou afficher un message de fin de partie.
-                Toast.makeText(MainActivity.this, "Nouveau mot Facile", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DifficileActivity.this, "Nouveau mot Difficile", Toast.LENGTH_SHORT).show();
                 genererMotAleatoire();
                 lancerCompteARebours();
 
             }
-
         };
-
-
 
         countdownTimer.start();
     }
@@ -245,15 +237,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         // Arrêter l'activité et quitter l'application
-        finish();
         timer.cancel();
         countdownTimer.cancel();
+        finish();
+
     }
     @Override
     protected void onPause() {
         super.onPause();
         timer.cancel(); // Arrêter le timer
     }
+
     private void showGameOverDialog() {
 
         // Vibrer le téléphone
