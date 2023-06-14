@@ -18,11 +18,12 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:text="Le Mot à deviner est composé des lettres ci dessous"
+                android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -73,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/lavender"
-                android:layout_marginTop="25sp"
+                android:layout_marginTop="35sp"
                 android:textSize="40dp"
                 android:textStyle="bold"
                 />
@@ -82,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/lavender"
-                android:textSize="40dp"
+                android:textSize="30dp"
                 android:textStyle="bold"
                 android:id="@+id/chronometreTextView"/>
 
@@ -99,19 +100,39 @@
             android:padding="10dp"
             android:text="Score: 0"
             android:textSize="20sp" />
-        <TextView
-            android:id="@+id/niveauTextView"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:background="@drawable/back"
-            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="3dp"
-            android:padding="10dp"
-            android:text="Niveau: Normal"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/niveauTextView"
+                android:layout_marginRight="20dp"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="@drawable/back"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="3dp"
+                android:padding="10dp"
+                android:text="Niveau: Normal"
 
-            android:textSize="20sp" />
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/vieTextView"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:background="@drawable/back"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="3dp"
+                android:padding="10dp"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"

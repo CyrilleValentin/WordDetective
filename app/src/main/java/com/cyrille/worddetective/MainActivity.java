@@ -1,5 +1,6 @@
 package com.cyrille.worddetective;
 
+import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -35,16 +36,17 @@ import java.util.Locale;
 import java.util.Random;
 import com.cyrille.worddetective.HomeActivity;
 public class MainActivity extends AppCompatActivity {
-     int score =9 ;
+     int score =0 ;
+    int vie=3;
      LinearLayout linearLayout;
     Button soumettre;
     TextInputEditText textInputEditText;
     private String motADeviner;
     private CountDownTimer timer;
-    TextView textMotADeviner,scoreText;
+    TextView textMotADeviner,scoreText,vieT;
     private TextView chronometreTextView;
     private CountDownTimer countdownTimer;
-    String[] mots ={"chat", "nuage", "doux", "peur", "table", "soir", "rire", "noir", "pomme", "ferme", "bleu", "belle", "ouest", "rouge", "verre", "café", "dîner", "ville", "école", "poire", "chien", "jouer", "livre", "dormir", "fleur", "port", "sable", "carte", "lune", "soleil", "vent", "pain", "vin", "manger", "salut", "cadeau", "voix", "film", "fruit", "musée", "arbre", "vague", "mer", "bien", "avril", "idée", "nuit", "juin", "nager", "parc", "robe", "printemps", "automne", "hiver", "été", "sac", "page", "nez", "roi", "bois", "plat", "merci", "chose", "fort", "vite", "joli", "corps", "ours", "loup", "lion", "chou", "lapin", "daim", "cygne", "veau", "vache", "agneau", "cheval", "âne", "dinde", "poule", "canard", "oie", "biche", "cerf", "renard", "rat", "souris", "chaton", "chiot", "faon", "tigre", "loutre", "belette", "mouton", "bœuf", "légume", "fruits", "pêche", "raisin", "banane", "orange", "melon", "fraise", "kiwi", "tomate", "poivron", "citron", "ananas", "champignon", "brocoli", "fenouil", "céleri", "poireau", "oignon", "radis", "maïs", "carotte", "pomme de terre", "artichaut", "aubergine", "pois", "salade", "chou-fleur", "haricot", "courgette", "concombre", "betterave", "choux de Bruxelles", "asperge", "épinard", "patate douce", "cresson", "endive", "navet", "potiron", "chicorée", "roquette", "romaine", "scarole", "mâche", "laitue", "échalote", "ail", "topinambour", "rutabaga", "fenouil", "citrouille", "potimarron", "rose", "tulipe", "orchidée", "marguerite", "pensée", "mimosa", "lys", "pivoine", "coquelicot", "nénuphar", "fougère", "edelweiss", "cactus", "jasmin", "géranium", "camélia", "hortensia", "lavande", "sauge", "roseau", "palmier", "érable", "chêne", "saule", "cèdre", "bouleau", "pin", "sapin", "platane", "cyprès", "if", "châtaignier", "hêtre", "aulne", "frêne", "acacia", "tilleul", "olivier", "genévrier", "pommier", "prunier", "abricotier", "cerisier", "poirier", "pêcher", "figuier", "amandier", "noyer", "vigne", "cognassier", "grenadier", "citronnier", "oranger", "néflier", "pistachier", "bananier", "manguier"};
+    String[] mots ={"chat", "nuage", "doux", "peur", "table", "soir", "rire", "noir", "pomme", "ferme", "bleu", "belle", "ouest", "rouge", "verre", "café", "dîner", "ville", "école", "poire", "chien", "jouer", "livre", "dormir", "fleur", "port", "sable", "carte", "lune", "soleil", "vent", "pain", "vin", "manger", "salut", "cadeau", "voix", "film", "fruit", "musée", "arbre", "vague", "mer", "bien", "avril", "idée", "nuit", "juin", "nager", "parc", "robe", "printemps", "automne", "hiver", "été", "sac", "page", "nez", "roi", "bois", "plat", "merci", "chose", "fort", "vite", "joli", "corps", "ours", "loup", "lion", "chou", "lapin", "daim", "cygne", "veau", "vache", "agneau", "cheval", "âne", "dinde", "poule", "canard", "oie", "biche", "cerf", "renard", "rat", "souris", "chaton", "chiot", "faon", "tigre", "loutre", "belette", "mouton", "bœuf", "légume", "fruits", "pêche", "raisin", "banane", "orange", "melon", "fraise", "kiwi", "tomate", "poivron", "citron", "ananas", "champignon", "brocoli", "fenouil", "céleri", "poireau", "oignon", "radis", "maïs", "carotte", "pomme de terre", "artichaut", "aubergine", "pois", "salade", "chou-fleur", "haricot", "courgette", "concombre", "betterave", "choux", "asperge", "épinard", "patate douce", "cresson", "endive", "navet", "potiron", "chicorée", "roquette", "romaine", "scarole", "mâche", "laitue", "échalote", "ail","rutabaga", "fenouil", "rose", "tulipe", "orchidée", "marguerite", "pensée", "mimosa", "lys", "pivoine", "nénuphar", "fougère", "edelweiss", "cactus", "jasmin", "géranium", "camélia", "hortensia", "lavande", "sauge", "roseau", "palmier", "érable", "chêne", "saule", "cèdre", "bouleau", "pin", "sapin", "platane", "cyprès", "if","hêtre", "aulne", "frêne", "acacia", "tilleul", "olivier", "genévrier", "pommier", "prunier", "abricotier", "cerisier", "poirier", "pêcher", "figuier", "amandier", "noyer", "vigne", "cognassier", "grenadier", "citronnier", "oranger", "néflier", "pistachier", "bananier", "manguier"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +54,14 @@ public class MainActivity extends AppCompatActivity {
         soumettre=findViewById(R.id.btn_submit);
         chronometreTextView = findViewById(R.id.chronometreTextView);
         textMotADeviner=findViewById(R.id.textMotADeviner);
+        vieT=findViewById(R.id.vieTextView);
        textInputEditText = findViewById(R.id.reponse);
        scoreText=findViewById(R.id.scoreTextView);
       linearLayout = findViewById(R.id.layoutLettres);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setSelectedItemId(R.id.jeu);
         scoreText.setText("Score: " + score);
-
+        vieT.setText("Vie :x" + vie);
 
         genererMotAleatoire();
         lancerCompteARebours();
@@ -132,9 +135,9 @@ public class MainActivity extends AppCompatActivity {
 
     // Méthode appelée lorsqu'une mauvaise réponse est donnée
     private void decrementScore() {
-        score -= 3;
-        scoreText.setText("Score: " + score);
-        if (score <= 0) {
+        vie -= 1;
+        vieT.setText("Vie:x" + vie);
+        if (vie <= 0) {
             countdownTimer.cancel();
             showGameOverDialog();
 
@@ -267,16 +270,16 @@ public class MainActivity extends AppCompatActivity {
 
         //Afficher AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setIcon(R.drawable.info);
         builder.setTitle("Game Over")
-                .setMessage("Votre score est inférieur ou égal à 0. Vous avez perdu !");
+                .setMessage("Votre vie est inférieur ou égal à 0. Vous avez perdu !" +"Le mot qu'il fallait deviner est: "+motADeviner);
         builder.setPositiveButton("Nouvelle Partie", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // L'utilisateur a choisi de continuer, vous pouvez ajouter ici le code pour recommencer le jeu
                 // Exemple : recommencerJeu();
-                score = 9;
-                scoreText.setText("Score: " + score);
-
+                vie = 3;
+                vieT.setText("Vie:x" + vie);
                 genererMotAleatoire();
                 lancerCompteARebours();
 

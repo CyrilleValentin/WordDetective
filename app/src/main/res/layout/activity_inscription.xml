@@ -8,7 +8,7 @@
     android:gravity="center"
     android:padding="15dp"
     android:background="@drawable/im2"
-    tools:context=".RegisterActivity"
+    tools:context=".InscriptionActivity"
     tools:ignore="ExtraText">
 
 
@@ -46,6 +46,18 @@
             android:hint="Nom du joueur"
             android:layout_width="match_parent"
             android:inputType="text"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+            android:drawablePadding="7dp"
+            android:drawableStart="@drawable/lock"
+            android:id="@+id/password"
+            android:hint="Mot de passe du joueur"
+            android:layout_width="match_parent"
+            android:inputType="textPassword"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 

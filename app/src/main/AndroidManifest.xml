@@ -15,7 +15,7 @@
         android:theme="@style/Theme.WordDetective"
         tools:targetApi="31">
         <activity
-            android:name=".RegisterActivity"
+            android:name=".SplashscreenActivit"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,25 +24,29 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".InscriptionActivity"
+            android:exported="false"/>
+
+        <activity
             android:name=".NormalActivity"
-            android:theme="@style/Theme.Material3.Light.NoActionBar"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Material3.Light.NoActionBar" />
         <activity
             android:name=".DifficileActivity"
-            android:theme="@style/Theme.Material3.Light.NoActionBar"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Material3.Light.NoActionBar" />
         <activity
             android:name=".HomeActivity"
-            android:theme="@style/Theme.Material3.Light.NoActionBar"
-            android:exported="false"/>
+            android:exported="false"
+            android:theme="@style/Theme.Material3.Light.NoActionBar" />
         <activity
             android:name=".ClassementActivity"
-            android:theme="@style/Theme.Material3.Light.NoActionBar"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Material3.Light.NoActionBar" />
         <activity
             android:name=".CompteActivity"
-            android:theme="@style/Theme.Material3.Light.NoActionBar"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Material3.Light.NoActionBar" />
         <activity
             android:name=".ParametreActivity"
             android:exported="false" />

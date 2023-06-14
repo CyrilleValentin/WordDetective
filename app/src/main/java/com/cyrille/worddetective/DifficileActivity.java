@@ -29,13 +29,14 @@ import java.util.Locale;
 import java.util.Random;
 
 public class DifficileActivity extends AppCompatActivity {
-    int score =9 ;
+    int score =0 ;
+    int vie=3;
     LinearLayout linearLayout;
     Button soumettre;
     TextInputEditText textInputEditText;
     private String motADeviner;
     private CountDownTimer timer;
-    TextView textMotADeviner,scoreText;
+    TextView textMotADeviner,scoreText,vieT;
     private TextView chronometreTextView;
     private CountDownTimer countdownTimer;
     String[] mots={"parapluie", "éléphant", "familial", "girafe", "machiner", "racinaire", "clavière", "faisceau", "boulevard", "japonais", "bibliothè", "cartable", "nuisible", "cahier", "tablette", "espérant", "diplôme", "bijouter", "montagne", "préparer", "activer", "endormir", "facteur", "guitare", "harmonie", "imprimer", "randonnée", "travailler", "climat", "question", "poussière", "fauteuil", "savonner", "déjeuner", "armoire", "fenêtre", "ordinate", "piscine", "football", "immeuble", "orchestre", "vacances", "valise", "lavabo", "chameau", "écureuil", "festival", "campagne", "portrait", "hiver", "orchidée", "pleurer", "sourire", "éclairage", "apprécier", "énergie", "toujours", "bienvenue", "aéroport", "décorer", "magasin", "santé", "batterie", "gâteau", "hamburger", "végétal", "aquarium", "parcours", "rêverie", "sculpture", "vétérinaire", "liberté", "abaisser", "affirmer", "baladeur", "calendrier", "dessiner", "tambour", "enchanteur", "festival", "galopant", "incroyable", "jalousie", "kilogramme", "librairie", "mammifère", "naviguer", "observateur", "parasol", "qualifié", "raccompagner", "salamandre", "télévision", "uranium", "vaisselier", "wagonnet", "xérophyte", "yogourt", "zodiaque", "aéroglisseur", "bénévole", "concombre", "dépenser", "élévation", "flamboyant", "gratuité", "héliport", "iconique", "jumelage", "kayakiste", "lévitation", "magnifique", "nauséeux", "optimiste", "provoquer", "quinconce", "recycler", "séduisant", "tablette", "utopique", "ventilateur", "wagon-lit", "xylographie", "yachtman", "zèbre", "abécédaire", "bénéfique", "congrès", "découverte", "éléphant", "fréquence", "géologie", "hélium", "iconoclaste", "jument", "kérosène", "logiciel", "magnétise", "négociant", "officier", "propre", "quartier", "reconnaître", "schéma", "tortue", "utopiste", "vacancier", "wagonnier", "xylophone", "yachting", "zirconium", "acoustique", "bibliothèque", "confiance", "déterminer", "espérance", "flamme", "graphique", "hydraulique", "intégrité", "joaillerie", "klaxonner", "logarithme", "mannequin", "nécessaire", "opportunité", "proverbe", "quintessence", "révolution", "symétrie", "transparence", "utilisation", "vagabonder", "wattmètre", "xénophobe", "yogiste", "zoologiste", "ambassadeur", "bénéficiaire", "concepteur", "démocratie", "éducation", "fidélité", "générosité", "hospitalier", "inspiration", "judiciaire", "kinésithérapie", "loyauté", "magnificence", "négociation", "opposition", "prévision", "qualification", "réalisation", "satisfaction", "technologie", "uniformité", "variabilité", "westphalien", "xérophtalmie", "yogini", "zootechnie"};
@@ -49,11 +50,12 @@ public class DifficileActivity extends AppCompatActivity {
         textMotADeviner=findViewById(R.id.textMotADeviner);
         textInputEditText = findViewById(R.id.reponse);
         scoreText=findViewById(R.id.scoreTextView);
+        vieT=findViewById(R.id.vieTextView);
         linearLayout = findViewById(R.id.layoutLettres);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setSelectedItemId(R.id.jeu);
         scoreText.setText("Score: " + score);
-
+        vieT.setText("Vie :x" + vie);
 
         genererMotAleatoire();
         lancerCompteARebours();
@@ -127,9 +129,9 @@ public class DifficileActivity extends AppCompatActivity {
 
     // Méthode appelée lorsqu'une mauvaise réponse est donnée
     private void decrementScore() {
-        score -= 3;
-        scoreText.setText("Score: " + score);
-        if (score <= 0) {
+        vie -= 1;
+        vieT.setText("Vie:x" + vie);
+        if (vie <= 0) {
             countdownTimer.cancel();
             showGameOverDialog();
 
@@ -262,14 +264,14 @@ public class DifficileActivity extends AppCompatActivity {
         //Afficher AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Game Over")
-                .setMessage("Votre score est inférieur ou égal à 0. Vous avez perdu !");
+                .setMessage("Votre score est inférieur ou égal à 0. Vous avez perdu !" +"Le mot qu'il fallait deviner est: "+motADeviner);
         builder.setPositiveButton("Nouvelle Partie", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // L'utilisateur a choisi de continuer, vous pouvez ajouter ici le code pour recommencer le jeu
                 // Exemple : recommencerJeu();
-                score = 9;
-                scoreText.setText("Score: " + score);
+                vie = 3;
+                vieT.setText("Vie:x" + vie);
 
                 genererMotAleatoire();
                 lancerCompteARebours();

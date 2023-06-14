@@ -29,13 +29,14 @@ import java.util.Locale;
 import java.util.Random;
 
 public class NormalActivity extends AppCompatActivity {
-    int score =9 ;
+    int score =0 ;
+    int vie=3;
     LinearLayout linearLayout;
     Button soumettre;
     TextInputEditText textInputEditText;
     private String motADeviner;
     private CountDownTimer timer;
-    TextView textMotADeviner,scoreText;
+    TextView textMotADeviner,scoreText,vieT;
     private TextView chronometreTextView;
     private CountDownTimer countdownTimer;
     String[] mots={"course", "vente", "salade", "soleil", "hôtel", "table", "nature", "orange", "village", "poulet", "hiver", "beauté", "passer", "souris", "musée", "cinéma", "argent", "amoureux", "ananas", "sieste", "pluie", "animal", "douche", "plante", "gâteau", "papier", "poisson", "jardin", "camping", "peintre", "voyage", "écrire", "calme", "farine", "fleur", "métro", "piano", "astéro", "bougie", "fraise", "légume", "randonn", "volcan", "rivière", "pétale", "citron", "banane", "famille", "fête", "groupe", "chante", "blague", "pièce", "course", "fraise", "couple", "fruits", "avion", "amour", "gloire", "héros", "île", "jungle", "kiosque", "larme", "mystère", "nuance", "ombre", "pouvoir", "quartier", "rêve", "soleil", "travail", "union", "vélo", "wagon", "xylophone", "yoga", "zoo", "amusant", "blanche", "cahier", "délice", "écho", "faucon", "globe", "hôpital", "image", "jupe", "kaki", "lampe", "machine", "noble", "orange", "papillon", "quitter", "rose", "simple", "tableau", "utile", "vague", "wagon", "xylophone", "yeux", "zebra", "acacia", "bambou", "cascade", "délicieux", "élégant", "flamme", "gorille", "hibou", "intelligent", "jouet", "kiwi", "lentille", "mango", "noix", "oasis", "pamplemousse", "quartz", "raisin", "salade", "tamis", "univers", "vanille", "walrus", "xylophagous", "yacht", "zeppelin", "abord", "brouillard", "cloche", "décor", "effort", "fille", "grille", "hache", "indice", "joker", "klaxon", "lance", "moule", "nuage", "oasis", "pamplemousse", "quart", "rouleau", "sable", "toile", "usage", "vase", "wagon", "xylem", "yoga", "zèbre", "arcade", "bonnet", "cercle", "délice", "effet", "farine", "grappe", "hache", "idée", "joie", "kiwi", "lampe", "moule", "nouveau", "orage", "paix", "quille", "rouleau", "sable", "tiroir", "utile", "vase", "wagon", "xylophone", "yoga", "zèbre"};
@@ -49,12 +50,12 @@ public class NormalActivity extends AppCompatActivity {
         textMotADeviner=findViewById(R.id.textMotADeviner);
         textInputEditText = findViewById(R.id.reponse);
         scoreText=findViewById(R.id.scoreTextView);
+        vieT=findViewById(R.id.vieTextView);
         linearLayout = findViewById(R.id.layoutLettres);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setSelectedItemId(R.id.jeu);
         scoreText.setText("Score: " + score);
-
-
+        vieT.setText("Vie :x" + vie);
         genererMotAleatoire();
         lancerCompteARebours();
 
@@ -127,9 +128,9 @@ public class NormalActivity extends AppCompatActivity {
 
     // Méthode appelée lorsqu'une mauvaise réponse est donnée
     private void decrementScore() {
-        score -= 3;
-        scoreText.setText("Score: " + score);
-        if (score <= 0) {
+        vie -= 1;
+        vieT.setText("Vie:x" + vie);
+        if (vie <= 0) {
             countdownTimer.cancel();
             showGameOverDialog();
 
@@ -215,7 +216,8 @@ public class NormalActivity extends AppCompatActivity {
 
                 // Actions à effectuer lorsque le temps est écoulé
                 // Par exemple, réinitialiser le jeu ou afficher un message de fin de partie.
-                Toast.makeText(NormalActivity.this, "Nouveau mot Normal", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NormalActivity.this, "Le mot à deviner était : "+motADeviner, Toast.LENGTH_LONG).show();
+               Toast.makeText(NormalActivity.this,  "Nouveau mot Normal", Toast.LENGTH_SHORT).show();
                 genererMotAleatoire();
                 lancerCompteARebours();
 
@@ -256,19 +258,22 @@ public class NormalActivity extends AppCompatActivity {
             MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.game_over);
             mediaPlayer.start();
             vibrator.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+            int nouveauScore = 100;
+
+
         }
 
         //Afficher AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Game Over")
-                .setMessage("Votre score est inférieur ou égal à 0. Vous avez perdu !");
+                .setMessage("Votre vie est inférieur ou égal à 0. Vous avez perdu !" +"Le mot qu'il fallait deviner est: "+motADeviner);
         builder.setPositiveButton("Nouvelle Partie", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // L'utilisateur a choisi de continuer, vous pouvez ajouter ici le code pour recommencer le jeu
                 // Exemple : recommencerJeu();
-                score = 9;
-                scoreText.setText("Score: " + score);
+                vie = 3;
+                vieT.setText("Vie:x" + vie);
 
                 genererMotAleatoire();
                 lancerCompteARebours();
