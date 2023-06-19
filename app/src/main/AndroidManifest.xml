@@ -25,6 +25,7 @@
         </activity>
         <activity
             android:name=".InscriptionActivity"
+            android:theme="@style/Theme.Material3.Light"
             android:exported="false"/>
 
         <activity

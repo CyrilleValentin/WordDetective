@@ -4,16 +4,71 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:background="@drawable/im2"
     tools:context=".CompteActivity">
+    <ImageView
+        android:layout_width="150dp"
+        android:src="@drawable/person"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/back"
+        android:layout_height="150dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Compte"
-        android:textColor="@color/lavender"
         android:layout_centerInParent="true"
-        android:textSize="36sp" />
+        android:orientation="vertical"
+        android:padding="3dp">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:enabled="false"
+                android:id="@+id/email"
+                android:layout_height="wrap_content"
+                android:hint="Email du joueur"
+                android:textStyle="bold"
+                android:textSize="25dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:enabled="false"
+                android:id="@+id/nom"
+                android:layout_height="wrap_content"
+                android:hint="Nom du joueur"
+                android:textStyle="bold"
+                android:textSize="25dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:enabled="false"
+                android:id="@+id/score"
+                android:layout_height="wrap_content"
+                android:hint="Score du joueur"
+                android:textStyle="bold"
+                android:textSize="25dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/supression"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="550dp"
+        android:text="Supprimer mon compte" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"

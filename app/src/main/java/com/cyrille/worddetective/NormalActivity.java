@@ -246,7 +246,8 @@ public class NormalActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        timer.cancel(); // Arrêter le timer
+        //timer.cancel(); // Arrêter le timer
+        countdownTimer.cancel();
     }
 
     private void showGameOverDialog() {

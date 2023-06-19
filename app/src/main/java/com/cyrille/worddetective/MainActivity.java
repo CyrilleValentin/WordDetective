@@ -1,6 +1,7 @@
 package com.cyrille.worddetective;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -35,12 +36,23 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import com.cyrille.worddetective.HomeActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class MainActivity extends AppCompatActivity {
      int score =0 ;
     int vie=3;
      LinearLayout linearLayout;
     Button soumettre;
     TextInputEditText textInputEditText;
+    private FirebaseAuth mAuth;
+    private DatabaseReference db;
+
     private String motADeviner;
     private CountDownTimer timer;
     TextView textMotADeviner,scoreText,vieT;
@@ -53,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         soumettre=findViewById(R.id.btn_submit);
         chronometreTextView = findViewById(R.id.chronometreTextView);
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance().getReference();
         textMotADeviner=findViewById(R.id.textMotADeviner);
         vieT=findViewById(R.id.vieTextView);
        textInputEditText = findViewById(R.id.reponse);
@@ -255,7 +269,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        timer.cancel(); // Arrêter le timer
+      //  timer.cancel(); // Arrêter le timer
+        countdownTimer.cancel();
     }
     private void showGameOverDialog() {
 
@@ -273,6 +288,12 @@ public class MainActivity extends AppCompatActivity {
         builder.setIcon(R.drawable.info);
         builder.setTitle("Game Over")
                 .setMessage("Votre vie est inférieur ou égal à 0. Vous avez perdu !" +"Le mot qu'il fallait deviner est: "+motADeviner);
+        String text = scoreText.getText().toString();
+        String numericText = text.replaceAll("[^0-9]", "");
+        int newScore =0;
+        newScore = Integer.parseInt(numericText);
+                updateScoreIfNeeded(newScore);
+
         builder.setPositiveButton("Nouvelle Partie", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -299,6 +320,27 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+    private void updateScoreIfNeeded(int newScore) {
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        if (firebaseUser != null) {
+            String userId = firebaseUser.getUid();
+            db.child("players").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Player player = dataSnapshot.getValue(Player.class);
+                    if (player != null && newScore > player.getScore()) {
+                        dataSnapshot.getRef().child("score").setValue(newScore);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Gérer les erreurs éventuelles
+                }
+            });
+        }
+    }
+
 
 
 
