@@ -31,30 +31,30 @@
         <activity
             android:name=".NormalActivity"
             android:exported="false"
-            android:theme="@style/Theme.Material3.Light.NoActionBar" />
+             />
         <activity
             android:name=".DifficileActivity"
             android:exported="false"
-            android:theme="@style/Theme.Material3.Light.NoActionBar" />
+             />
         <activity
             android:name=".HomeActivity"
             android:exported="false"
-            android:theme="@style/Theme.Material3.Light.NoActionBar" />
+            />
         <activity
             android:name=".ClassementActivity"
             android:exported="false"
-            android:theme="@style/Theme.Material3.Light.NoActionBar" />
+            />
         <activity
             android:name=".CompteActivity"
             android:exported="false"
-            android:theme="@style/Theme.Material3.Light.NoActionBar" />
+             />
         <activity
             android:name=".ParametreActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:theme="@style/Theme.Material3.Light.NoActionBar" />
+           />
     </application>
 
 </manifest>

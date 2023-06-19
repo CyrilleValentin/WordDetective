@@ -1,5 +1,6 @@
 package com.cyrille.worddetective;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -21,6 +22,13 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,6 +40,8 @@ public class NormalActivity extends AppCompatActivity {
     int score =0 ;
     int vie=3;
     LinearLayout linearLayout;
+    private FirebaseAuth mAuth;
+    private DatabaseReference db;
     Button soumettre;
     TextInputEditText textInputEditText;
     private String motADeviner;
@@ -46,6 +56,8 @@ public class NormalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_normal);
         soumettre=findViewById(R.id.btn_submit);
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance().getReference();
         chronometreTextView = findViewById(R.id.chronometreTextView);
         textMotADeviner=findViewById(R.id.textMotADeviner);
         textInputEditText = findViewById(R.id.reponse);
@@ -268,6 +280,11 @@ public class NormalActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Game Over")
                 .setMessage("Votre vie est inférieur ou égal à 0. Vous avez perdu !" +"Le mot qu'il fallait deviner est: "+motADeviner);
+        String text = scoreText.getText().toString();
+        String numericText = text.replaceAll("[^0-9]", "");
+        int newScore =0;
+        newScore = Integer.parseInt(numericText);
+        updateScoreIfNeeded(newScore);
         builder.setPositiveButton("Nouvelle Partie", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -296,7 +313,29 @@ public class NormalActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    private void updateScoreIfNeeded(int newScore) {
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        if (firebaseUser != null) {
+            String userId = firebaseUser.getUid();
+            db.child("players").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Player player = dataSnapshot.getValue(Player.class);
+                    if (player != null && newScore > player.getScore()) {
+                        dataSnapshot.getRef().child("score").setValue(newScore);
+                    }
+                }
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Gérer les erreurs éventuelles
+                }
+            });
+
+
+
+}
+    }
 
 }
 

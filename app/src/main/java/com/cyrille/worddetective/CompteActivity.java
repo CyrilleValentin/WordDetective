@@ -57,7 +57,27 @@ public class CompteActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.compte);
 
 
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
+            String userId = firebaseUser.getUid();
+            DatabaseReference playerRef = FirebaseDatabase.getInstance().getReference("players").child(userId);
+            playerRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Player player = dataSnapshot.getValue(Player.class);
+                    if (player != null) {
+                        nameT.setText(player.getName());
+                        emailT.setText(firebaseUser.getEmail());
+                        scoreT.setText(String.valueOf(player.getScore()));
+                    }
+                }
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Gérer les erreurs éventuelles
+                }
+            });
+        }
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int selectedItemId = item.getItemId();
